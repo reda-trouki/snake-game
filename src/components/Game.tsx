@@ -6,6 +6,8 @@ import { Coordinate, Direction, GestureEventType } from "../types/types"
 import Snake from "./Snake";
 import { checkGameOver } from "../utils/checkGameOver";
 import Food from "./Food";
+import { checkEatsFood } from "../utils/checkEatsFood";
+import { randomFoodPosition } from "../utils/randomFoodPosition"
 
 
 
@@ -27,6 +29,7 @@ export function Game():JSX.Element {
     );
     const [isGameOver, setIsGameOver] = REACT.useState<boolean>(false);
     const [isPaused, setIsPaused] = REACT.useState<boolean>(false);
+    const [score, setScore] = REACT.useState<number>(0);
 
     REACT.useEffect(() =>{
         if(!isGameOver){
@@ -38,12 +41,7 @@ export function Game():JSX.Element {
         }
     }, [snake, isGameOver, isPaused])
 
-    const generateFood = () =>{
-        setFood({
-            x: Math.floor(Math.random() * (GAME_BOUNDS.xMax - GAME_BOUNDS.xMin)) + GAME_BOUNDS.xMin + 1,
-            y: Math.floor(Math.random() * (GAME_BOUNDS.yMax - GAME_BOUNDS.yMin)) + GAME_BOUNDS.yMin + 1
-        })
-    }
+    
 
     const moveSnake = () => {
         const snakeHead = snake[0];
@@ -70,10 +68,13 @@ export function Game():JSX.Element {
         }
         // if its food grow snake
 
-        
-
-
-        setSnake([newHead, ...snake.slice(0, -1)]);
+        if (checkEatsFood(newHead, food, 2)) {
+            setFood(randomFoodPosition(GAME_BOUNDS.xMax, GAME_BOUNDS.yMax));
+            setSnake([...snake, newHead]);
+            setScore((prev)=>prev+SCORE_INCREMENT);
+        }else{
+            setSnake([newHead, ...snake.slice(0, -1)]);
+        }
     }
 
     const handleGesture = (event: GestureEventType) => {
