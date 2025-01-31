@@ -1,5 +1,4 @@
-﻿# snake-game
-a# Snake Game (Mobile)
+# Snake Game (Mobile)
 
 A classic Snake game built with **React Native** for mobile devices. Enjoy nostalgic gaming with smooth touch controls, score tracking, and a responsive interface.
 
