@@ -3,7 +3,7 @@
 A classic Snake game built with **React Native** for mobile devices. Enjoy nostalgic gaming with smooth touch controls, score tracking, and a responsive interface.
 
 
-<img src="./assets/images/screenshot.png" alt="Snake Game Screenshot" width="400" />
+<img src="./assets/images/screenshot.png" alt="Snake Game Screenshot" width="200" />
 
 ## Features
 - 🎮 **Classic Gameplay**: Relive the classic Snake game experience.
